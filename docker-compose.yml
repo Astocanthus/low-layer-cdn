@@ -1,0 +1,15 @@
+services:
+  cdn:
+    build: .
+    container_name: low-layer-cdn
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "9090:8080"
+    networks:
+      - cdn-network
+
+networks:
+  cdn-network:
+    driver: bridge
