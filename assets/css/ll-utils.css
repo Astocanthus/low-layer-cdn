@@ -1,0 +1,247 @@
+/* Copyright (C) - LOW-LAYER
+ * Contact : contact@low-layer.com
+ *
+ * ============================================================================
+ * ll-utils.css
+ * Pure utility classes for the LOW-LAYER design system
+ *
+ * Purpose:
+ *   - Provides atomic CSS utility classes for rapid prototyping
+ *   - Implements display, flexbox, grid, and positioning helpers
+ *   - Offers spacing, sizing, and visibility utilities
+ *   - Includes responsive variants for mobile-first development
+ *
+ * Key Functions:
+ *   - Display: hidden, block, flex, grid utilities
+ *   - Flexbox: Direction, alignment, gap, wrap controls
+ *   - Spacing: Padding and margin scale (0-10)
+ *   - Positioning: Relative, absolute, fixed, z-index
+ *   - Scrollbar: Custom styled scrollbar for webkit browsers
+ *
+ * Characteristics:
+ *   - All classes prefixed with .ll- for namespace isolation
+ *   - Responsive breakpoint at 768px (md: prefix)
+ *   - Uses CSS custom properties from ll-base.css
+ *   - Minimal footprint with single-purpose classes
+ * ============================================================================
+ */
+
+/* ---------------------------------------------------------------------------
+ * DISPLAY
+ * ---------------------------------------------------------------------------
+ * Core display property utilities.
+ */
+
+.ll-hidden { display: none; }
+.ll-block { display: block; }
+.ll-inline-block { display: inline-block; }
+.ll-flex { display: flex; }
+.ll-grid { display: grid; }
+
+/* ---------------------------------------------------------------------------
+ * FLEXBOX
+ * ---------------------------------------------------------------------------
+ * Flexbox layout utilities for direction, alignment, and distribution.
+ */
+
+.ll-flex-col { flex-direction: column; }
+.ll-flex-row { flex-direction: row; }
+.ll-flex-center { justify-content: center; align-items: center; }
+.ll-flex-between { justify-content: space-between; }
+.ll-flex-start { justify-content: flex-start; }
+.ll-flex-end { justify-content: flex-end; }
+.ll-items-center { align-items: center; }
+.ll-items-start { align-items: flex-start; }
+.ll-items-end { align-items: flex-end; }
+.ll-flex-1 { flex: 1; }
+.ll-flex-wrap { flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------------------
+ * GAP
+ * ---------------------------------------------------------------------------
+ * Spacing between flex/grid children.
+ */
+
+.ll-gap-1 { gap: 0.25rem; }
+.ll-gap-2 { gap: 0.5rem; }
+.ll-gap-3 { gap: 0.75rem; }
+.ll-gap-4 { gap: 1rem; }
+.ll-gap-6 { gap: 1.5rem; }
+.ll-gap-8 { gap: 2rem; }
+
+/* ---------------------------------------------------------------------------
+ * SPACING - PADDING
+ * ---------------------------------------------------------------------------
+ * Padding utilities following a consistent scale.
+ */
+
+.ll-p-0 { padding: 0; }
+.ll-p-2 { padding: 0.5rem; }
+.ll-p-4 { padding: 1rem; }
+.ll-p-6 { padding: 1.5rem; }
+.ll-p-8 { padding: 2rem; }
+.ll-p-10 { padding: 2.5rem; }
+
+.ll-px-4 { padding-inline: 1rem; }
+.ll-px-6 { padding-inline: 1.5rem; }
+.ll-py-2 { padding-block: 0.5rem; }
+.ll-py-4 { padding-block: 1rem; }
+.ll-pt-4 { padding-top: 1rem; }
+.ll-pb-4 { padding-bottom: 1rem; }
+
+/* ---------------------------------------------------------------------------
+ * SPACING - MARGIN
+ * ---------------------------------------------------------------------------
+ * Margin utilities following a consistent scale.
+ */
+
+.ll-m-0 { margin: 0; }
+.ll-mt-2 { margin-top: 0.5rem; }
+.ll-mt-4 { margin-top: 1rem; }
+.ll-mt-6 { margin-top: 1.5rem; }
+.ll-mt-8 { margin-top: 2rem; }
+.ll-mb-1 { margin-bottom: 0.25rem; }
+.ll-mb-2 { margin-bottom: 0.5rem; }
+.ll-mb-4 { margin-bottom: 1rem; }
+.ll-mb-6 { margin-bottom: 1.5rem; }
+.ll-mx-auto { margin-inline: auto; }
+
+/* ---------------------------------------------------------------------------
+ * SIZING
+ * ---------------------------------------------------------------------------
+ * Width, height, and constraint utilities.
+ */
+
+.ll-w-full { width: 100%; }
+.ll-h-full { height: 100%; }
+.ll-min-h-screen { min-height: 100vh; }
+.ll-max-w-narrow { max-width: var(--ll-container-narrow); }
+.ll-max-w-container { max-width: var(--ll-container-width); }
+
+/* ---------------------------------------------------------------------------
+ * POSITIONING
+ * ---------------------------------------------------------------------------
+ * Position property and inset utilities.
+ */
+
+.ll-relative { position: relative; }
+.ll-absolute { position: absolute; }
+.ll-fixed { position: fixed; }
+.ll-inset-0 { inset: 0; }
+
+/* ---------------------------------------------------------------------------
+ * Z-INDEX
+ * ---------------------------------------------------------------------------
+ * Stacking order utilities.
+ */
+
+.ll-z-0 { z-index: 0; }
+.ll-z-10 { z-index: 10; }
+.ll-z-20 { z-index: 20; }
+.ll-z-50 { z-index: 50; }
+.ll-z-100 { z-index: 100; }
+
+/* ---------------------------------------------------------------------------
+ * TEXT ALIGNMENT
+ * ---------------------------------------------------------------------------
+ * Horizontal text alignment utilities.
+ */
+
+.ll-text-left { text-align: left; }
+.ll-text-center { text-align: center; }
+.ll-text-right { text-align: right; }
+
+/* ---------------------------------------------------------------------------
+ * OVERFLOW
+ * ---------------------------------------------------------------------------
+ * Overflow behavior utilities.
+ */
+
+.ll-overflow-hidden { overflow: hidden; }
+.ll-overflow-auto { overflow: auto; }
+.ll-overflow-y-auto { overflow-y: auto; }
+
+/* ---------------------------------------------------------------------------
+ * VISIBILITY
+ * ---------------------------------------------------------------------------
+ * Opacity and visibility utilities including screen-reader only.
+ */
+
+.ll-opacity-0 { opacity: 0; }
+.ll-opacity-50 { opacity: 0.5; }
+.ll-opacity-70 { opacity: 0.7; }
+.ll-invisible { visibility: hidden; }
+
+.ll-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * POINTER EVENTS
+ * ---------------------------------------------------------------------------
+ * Mouse/touch interaction control utilities.
+ */
+
+.ll-pointer-none { pointer-events: none; }
+.ll-pointer-auto { pointer-events: auto; }
+
+/* ---------------------------------------------------------------------------
+ * CURSOR
+ * ---------------------------------------------------------------------------
+ * Cursor style utilities.
+ */
+
+.ll-cursor-pointer { cursor: pointer; }
+.ll-cursor-not-allowed { cursor: not-allowed; }
+
+/* ---------------------------------------------------------------------------
+ * BORDERS
+ * ---------------------------------------------------------------------------
+ * Border utilities using design system border color.
+ */
+
+.ll-border { border: 1px solid var(--ll-border); }
+.ll-border-t { border-top: 1px solid var(--ll-border); }
+.ll-border-b { border-bottom: 1px solid var(--ll-border); }
+.ll-border-0 { border: none; }
+
+/* ---------------------------------------------------------------------------
+ * SCROLLBAR
+ * ---------------------------------------------------------------------------
+ * Custom styled scrollbar for webkit browsers with theme colors.
+ */
+
+.ll-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ll-color-primary-muted) transparent;
+}
+
+.ll-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+.ll-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.ll-scrollbar::-webkit-scrollbar-thumb { background: var(--ll-color-primary-muted); border-radius: 3px; }
+.ll-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--ll-color-primary); }
+
+/* ---------------------------------------------------------------------------
+ * RESPONSIVE
+ * ---------------------------------------------------------------------------
+ * Mobile-first responsive utilities with md: breakpoint at 768px.
+ */
+
+@media (max-width: 768px) {
+    .md\:ll-hidden { display: none; }
+    .md\:ll-block { display: block; }
+    .md\:ll-flex-col { flex-direction: column; }
+}
+
+@media (min-width: 769px) {
+    .md\:ll-flex { display: flex; }
+    .md\:ll-flex-row { flex-direction: row; }
+}

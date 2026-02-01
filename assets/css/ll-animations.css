@@ -1,0 +1,176 @@
+/* Copyright (C) - LOW-LAYER
+ * Contact : contact@low-layer.com
+ *
+ * ============================================================================
+ * ll-animations.css
+ * Keyframe animations and transition utilities for the LOW-LAYER design system
+ *
+ * Purpose:
+ *   - Provides reusable CSS keyframe animations
+ *   - Defines animation utility classes for common effects
+ *   - Implements initial states for JavaScript-triggered animations
+ *   - Ensures accessibility with reduced-motion support
+ *
+ * Key Functions:
+ *   - Keyframes: fade, scale, pulse, spin, scan, shake effects
+ *   - Animation Classes: Ready-to-use .ll-anim-* utilities
+ *   - Initial States: .ll-anim-initial--* for JS orchestration
+ *   - Delay Utilities: .ll-delay-1 through .ll-delay-7
+ *
+ * Characteristics:
+ *   - All animations respect prefers-reduced-motion media query
+ *   - Durations optimized for perceived performance
+ *   - Compatible with ll-base.css transition variables
+ * ============================================================================
+ */
+
+/* ---------------------------------------------------------------------------
+ * KEYFRAMES
+ * ---------------------------------------------------------------------------
+ * Core animation keyframes used throughout the design system.
+ */
+
+@keyframes ll-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes ll-fade-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ll-fade-down {
+    from { opacity: 0; transform: translateY(-15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ll-fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes ll-fade-out-scale {
+    to { opacity: 0; transform: scale(0.95); }
+}
+
+@keyframes ll-scale-in {
+    from { opacity: 0; transform: scale(0.98); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ll-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+
+@keyframes ll-ping {
+    0%   { transform: scale(1); opacity: 0.75; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes ll-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ll-scan {
+    0%   { left: -50%; }
+    100% { left: 100%; }
+}
+
+@keyframes ll-shine {
+    from { left: -100%; }
+    to   { left: 100%; }
+}
+
+@keyframes ll-glow {
+    0%, 100% { box-shadow: 0 0 20px var(--ll-color-primary-glow); }
+    50%      { box-shadow: 0 0 35px var(--ll-color-primary-glow), 0 0 50px var(--ll-color-primary-subtle); }
+}
+
+@keyframes ll-scroll-pulse {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50%      { opacity: 0.5; transform: scaleY(0.6); }
+}
+
+@keyframes ll-shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* ---------------------------------------------------------------------------
+ * ANIMATION CLASSES
+ * ---------------------------------------------------------------------------
+ * Ready-to-use animation utilities applying keyframes with optimal timing.
+ */
+
+.ll-anim-fade-in { animation: ll-fade-in 0.5s ease forwards; }
+.ll-anim-fade-up { animation: ll-fade-up 0.8s ease both; }
+.ll-anim-fade-down { animation: ll-fade-down 0.8s ease both; }
+.ll-anim-fade-out { animation: ll-fade-out 0.5s ease forwards; }
+.ll-anim-fade-out-scale { animation: ll-fade-out-scale 0.5s ease forwards; }
+.ll-anim-scale-in { animation: ll-scale-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.ll-anim-pulse { animation: ll-pulse 1.5s ease-in-out infinite; }
+.ll-anim-spin { animation: ll-spin 1s linear infinite; }
+.ll-anim-glow { animation: ll-glow 2s ease-in-out infinite; }
+.ll-anim-shake { animation: ll-shake 0.5s ease-in-out; }
+
+/* ---------------------------------------------------------------------------
+ * INITIAL STATES
+ * ---------------------------------------------------------------------------
+ * Starting states for elements before JavaScript triggers animations.
+ */
+
+.ll-anim-initial {
+    opacity: 0;
+}
+
+.ll-anim-initial--up {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.ll-anim-initial--scale {
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+/* ---------------------------------------------------------------------------
+ * DELAYS
+ * ---------------------------------------------------------------------------
+ * Staggered animation delay utilities for sequenced animations.
+ */
+
+.ll-delay-1 { animation-delay: 0.1s; }
+.ll-delay-2 { animation-delay: 0.2s; }
+.ll-delay-3 { animation-delay: 0.3s; }
+.ll-delay-4 { animation-delay: 0.4s; }
+.ll-delay-5 { animation-delay: 0.5s; }
+.ll-delay-6 { animation-delay: 0.6s; }
+.ll-delay-7 { animation-delay: 0.7s; }
+
+/* ---------------------------------------------------------------------------
+ * TRANSITIONS
+ * ---------------------------------------------------------------------------
+ * Transition utilities using design system timing variables.
+ */
+
+.ll-transition { transition: all var(--ll-transition-base); }
+.ll-transition-fast { transition: all var(--ll-transition-fast); }
+.ll-transition-slow { transition: all var(--ll-transition-slow); }
+.ll-transition-opacity { transition: opacity 0.5s ease; }
+
+/* ---------------------------------------------------------------------------
+ * REDUCED MOTION
+ * ---------------------------------------------------------------------------
+ * Accessibility: Disables animations for users who prefer reduced motion.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
