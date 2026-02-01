@@ -1,0 +1,1149 @@
+/* Copyright (C) - LOW-LAYER
+ * Contact : contact@low-layer.com
+ *
+ * ============================================================================
+ * ll-components.css
+ * Complete UI component library for the LOW-LAYER design system
+ *
+ * Purpose:
+ *   - Provides ready-to-use sci-fi themed UI components
+ *   - Implements glass morphism, neon effects, and angular designs
+ *   - Offers multiple variants for buttons, cards, forms, and navigation
+ *   - Ensures responsive behavior across all viewport sizes
+ *
+ * Key Functions:
+ *   - Glass Cards: Frosted glass containers with optional CRT effect
+ *   - Buttons: Primary, ghost, danger, cyber variants with cut corners
+ *   - Forms: Styled inputs, labels, checkboxes with glow effects
+ *   - Cards: Featured cards, series cards, article rows
+ *   - Alerts: Error, warning, info, success message boxes
+ *   - Navigation: Sidebar items, social links, pagination
+ *
+ * Characteristics:
+ *   - All components use CSS variables for easy theming
+ *   - Requires ll-base.css for variables and reset
+ *   - Hover states include glow and transform effects
+ *   - Mobile-responsive with breakpoint at 768px
+ * ============================================================================
+ */
+
+/* ---------------------------------------------------------------------------
+ * GLASS CARD
+ * ---------------------------------------------------------------------------
+ * Frosted glass container with optional CRT scanline overlay effect.
+ */
+
+.ll-glass {
+    background: var(--ll-glass-bg);
+    backdrop-filter: blur(var(--ll-glass-blur));
+    -webkit-backdrop-filter: blur(var(--ll-glass-blur));
+    border: 1px solid var(--ll-border);
+    box-shadow:
+        0 0 40px rgba(0, 0, 0, 0.9),
+        inset 0 0 20px var(--ll-color-primary-soft);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--ll-transition-base), box-shadow var(--ll-transition-base);
+}
+
+.ll-glass:hover {
+    border-color: var(--ll-border-hover);
+}
+
+.ll-glass--crt::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * CLIP-PATH SHAPES
+ * ---------------------------------------------------------------------------
+ * Angular corner cuts for sci-fi aesthetic.
+ */
+
+.ll-clip-corners {
+    clip-path: polygon(
+        20px 0, 100% 0,
+        100% calc(100% - 20px), calc(100% - 20px) 100%,
+        0 100%, 0 20px
+    );
+}
+
+.ll-clip-corners--sm {
+    clip-path: polygon(
+        10px 0, 100% 0,
+        100% calc(100% - 10px), calc(100% - 10px) 100%,
+        0 100%, 0 10px
+    );
+}
+
+.ll-clip-corners--all {
+    clip-path: polygon(
+        10px 0, calc(100% - 10px) 0,
+        100% 10px, 100% calc(100% - 10px),
+        calc(100% - 10px) 100%, 10px 100%,
+        0 calc(100% - 10px), 0 10px
+    );
+}
+
+/* ---------------------------------------------------------------------------
+ * DECORATIVE CORNERS
+ * ---------------------------------------------------------------------------
+ * SVG-based and CSS corner accent decorations.
+ */
+
+.ll-corners {
+    position: relative;
+}
+
+.ll-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    stroke: var(--ll-color-primary);
+    stroke-width: 2;
+    fill: none;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 20;
+    transition: opacity var(--ll-transition-fast);
+}
+
+.ll-corner--tl { top: 0; left: 0; }
+.ll-corner--tr { top: 0; right: 0; transform: rotate(90deg); }
+.ll-corner--br { bottom: 0; right: 0; transform: rotate(180deg); }
+.ll-corner--bl { bottom: 0; left: 0; transform: rotate(270deg); }
+
+.ll-corners:hover .ll-corner {
+    opacity: 1;
+}
+
+.ll-corners-css::before,
+.ll-corners-css::after {
+    content: "";
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    border-color: var(--ll-color-primary-muted);
+    border-style: solid;
+    border-width: 0;
+    z-index: 20;
+    pointer-events: none;
+    transition: border-color var(--ll-transition-fast);
+}
+
+.ll-corners-css::before {
+    top: 0;
+    left: 0;
+    border-top-width: 2px;
+    border-left-width: 2px;
+}
+
+.ll-corners-css::after {
+    bottom: 0;
+    right: 0;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+}
+
+.ll-corners-css:hover::before,
+.ll-corners-css:hover::after {
+    border-color: var(--ll-color-primary);
+}
+
+/* ---------------------------------------------------------------------------
+ * BUTTONS
+ * ---------------------------------------------------------------------------
+ * Sci-fi styled buttons with angular cut corners and glow effects.
+ */
+
+.ll-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    font-family: var(--ll-font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--ll-transition-base);
+    clip-path: polygon(
+        0 10px, 10px 0,
+        calc(100% - 10px) 0, 100% 10px,
+        100% calc(100% - 10px), calc(100% - 10px) 100%,
+        10px 100%, 0 calc(100% - 10px)
+    );
+}
+
+.ll-btn--primary {
+    background: var(--ll-color-primary);
+    color: var(--ll-text-black);
+    border-color: var(--ll-color-primary);
+}
+
+.ll-btn--primary:hover {
+    box-shadow: var(--ll-glow-strong);
+    transform: translateY(-3px);
+}
+
+.ll-btn--primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
+
+.ll-btn--primary:hover::after {
+    animation: ll-shine 0.5s ease forwards;
+}
+
+.ll-btn--ghost {
+    background: transparent;
+    color: var(--ll-color-primary);
+    border-color: var(--ll-border);
+}
+
+.ll-btn--ghost:hover {
+    background: var(--ll-color-primary-subtle);
+    border-color: var(--ll-color-primary);
+}
+
+.ll-btn--danger {
+    background: transparent;
+    color: var(--ll-color-danger);
+    border-color: var(--ll-color-danger-muted);
+}
+
+.ll-btn--danger:hover {
+    background: var(--ll-color-danger-subtle);
+    border-color: var(--ll-color-danger);
+}
+
+.ll-btn--loading {
+    background: var(--ll-color-secondary);
+    border-color: var(--ll-color-secondary);
+    color: var(--ll-text-black);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ll-btn--loading .ll-btn__text {
+    animation: ll-pulse 0.8s ease-in-out infinite;
+}
+
+.ll-btn--sm {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.75rem;
+}
+
+.ll-btn--lg {
+    padding: 1.1rem 2.5rem;
+    font-size: 0.9rem;
+}
+
+.ll-btn--cyber {
+    background: var(--ll-color-primary-subtle);
+    border: 1px solid var(--ll-color-primary);
+    color: var(--ll-color-primary);
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+}
+
+.ll-btn--cyber:hover {
+    background: var(--ll-color-primary);
+    color: var(--ll-text-black);
+    box-shadow: 0 0 25px var(--ll-color-primary-glow);
+    transform: none;
+}
+
+.ll-btn--block {
+    width: 100%;
+}
+
+.ll-btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .ll-btn-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ll-btn-group .ll-btn {
+        width: 100%;
+        max-width: 260px;
+    }
+}
+
+/* ---------------------------------------------------------------------------
+ * FORM INPUTS
+ * ---------------------------------------------------------------------------
+ * Styled form elements with glow focus states.
+ */
+
+.ll-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.ll-form-group + .ll-form-group {
+    margin-top: 1.5rem;
+}
+
+.ll-label {
+    font-family: var(--ll-font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ll-text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.ll-label--required::after {
+    content: " *";
+    color: var(--ll-color-danger);
+}
+
+.ll-input-wrap {
+    position: relative;
+}
+
+.ll-input {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-family: var(--ll-font-mono);
+    font-size: 0.875rem;
+    color: var(--ll-color-primary);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid var(--ll-border);
+    outline: none;
+    transition: all var(--ll-transition-base);
+}
+
+.ll-input::placeholder {
+    color: var(--ll-text-dim);
+}
+
+.ll-input:focus {
+    border-color: var(--ll-color-primary);
+    background: var(--ll-color-primary-subtle);
+    box-shadow: 0 0 15px var(--ll-color-primary-glow);
+}
+
+.ll-input-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ll-text-dim);
+    pointer-events: none;
+}
+
+.ll-input-wrap--icon-left .ll-input {
+    padding-left: 3rem;
+}
+
+.ll-input-wrap--icon-left .ll-input-icon {
+    right: auto;
+    left: 1rem;
+}
+
+.ll-input--error {
+    border-color: var(--ll-color-danger);
+}
+
+.ll-form-error {
+    font-size: 0.75rem;
+    color: var(--ll-color-danger);
+    margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * CHECKBOX
+ * ---------------------------------------------------------------------------
+ * Custom styled checkbox with glow effect on check.
+ */
+
+.ll-checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.ll-checkbox__input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ll-checkbox__box {
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 1px solid var(--ll-border);
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--ll-transition-fast);
+}
+
+.ll-checkbox__input:checked + .ll-checkbox__box {
+    border-color: var(--ll-color-primary);
+    background: var(--ll-color-primary-subtle);
+}
+
+.ll-checkbox__input:checked + .ll-checkbox__box::after {
+    content: "✓";
+    font-size: 0.75rem;
+    color: var(--ll-color-primary);
+}
+
+.ll-checkbox__input:focus + .ll-checkbox__box {
+    box-shadow: 0 0 0 2px var(--ll-color-primary-muted);
+}
+
+/* ---------------------------------------------------------------------------
+ * LOADER
+ * ---------------------------------------------------------------------------
+ * Scanning bar animation for loading states.
+ */
+
+.ll-loader {
+    width: 100%;
+    text-align: center;
+}
+
+.ll-loader__bar {
+    width: 90%;
+    height: 2px;
+    margin: 1rem auto;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.ll-loader__bar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: var(--ll-color-primary);
+    box-shadow: 0 0 10px var(--ll-color-primary);
+    animation: ll-scan 1s infinite linear;
+}
+
+.ll-loader__text {
+    font-family: var(--ll-font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--ll-color-secondary);
+    animation: ll-pulse 1.5s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * STATUS BADGE
+ * ---------------------------------------------------------------------------
+ * Online/offline indicator with ping animation.
+ */
+
+.ll-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    font-family: var(--ll-font-mono);
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.ll-status--online {
+    color: var(--ll-color-secondary);
+    border: 1px solid var(--ll-color-secondary-muted);
+    background: var(--ll-color-secondary-subtle);
+    box-shadow: 0 0 10px var(--ll-color-secondary-subtle);
+}
+
+.ll-status--offline {
+    color: var(--ll-color-danger);
+    border: 1px solid var(--ll-color-danger-muted);
+    background: var(--ll-color-danger-subtle);
+}
+
+.ll-status__dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.ll-status__dot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.ll-status--online .ll-status__dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    animation: ll-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * ALERT BOXES
+ * ---------------------------------------------------------------------------
+ * Semantic message boxes for errors, warnings, info, and success.
+ */
+
+.ll-alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.ll-alert--error {
+    background: var(--ll-color-danger-subtle);
+    border-color: var(--ll-color-danger);
+    color: var(--ll-color-danger);
+}
+
+.ll-alert--warning {
+    background: var(--ll-color-warning-subtle);
+    border-color: var(--ll-color-warning);
+    color: var(--ll-color-warning);
+}
+
+.ll-alert--info {
+    background: var(--ll-color-primary-subtle);
+    border-color: var(--ll-color-primary);
+    color: var(--ll-color-primary);
+}
+
+.ll-alert--success {
+    background: var(--ll-color-secondary-subtle);
+    border-color: var(--ll-color-secondary);
+    color: var(--ll-color-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+ * SECTION LABEL
+ * ---------------------------------------------------------------------------
+ * Category/section indicator with decorative line.
+ */
+
+.ll-section-label {
+    font-family: var(--ll-font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ll-color-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.ll-section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--ll-color-primary);
+}
+
+/* ---------------------------------------------------------------------------
+ * SECTION TITLE
+ * ---------------------------------------------------------------------------
+ * Large display heading for page sections.
+ */
+
+.ll-section-title {
+    font-family: var(--ll-font-display);
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--ll-text);
+}
+
+/* ---------------------------------------------------------------------------
+ * FEATURED CARD
+ * ---------------------------------------------------------------------------
+ * Full card component with image, body, and metadata areas.
+ */
+
+.ll-card {
+    position: relative;
+    background: var(--ll-bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--ll-border);
+    transition: transform var(--ll-transition-base), box-shadow var(--ll-transition-base), border-color var(--ll-transition-base);
+}
+
+.ll-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ll-color-primary);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), var(--ll-glow);
+}
+
+.ll-card__img {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ll-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) saturate(0.9);
+    transition: transform var(--ll-transition-slow), filter var(--ll-transition-base);
+}
+
+.ll-card:hover .ll-card__img img {
+    transform: scale(1.05);
+    filter: brightness(1) saturate(1);
+}
+
+.ll-card__img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 20%, rgba(8, 8, 12, 0.95) 100%);
+    pointer-events: none;
+}
+
+.ll-card__body {
+    flex: 1;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.ll-card__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--ll-font-mono);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ll-color-primary);
+    padding: 0.3rem 0.6rem;
+    background: var(--ll-color-primary-subtle);
+    border: 1px solid var(--ll-border);
+    width: fit-content;
+    margin-bottom: 0.75rem;
+}
+
+.ll-card__tag-icon {
+    font-size: 0.85rem;
+}
+
+.ll-card__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    color: var(--ll-text);
+    transition: color var(--ll-transition-fast);
+}
+
+.ll-card:hover .ll-card__title {
+    color: var(--ll-color-primary);
+}
+
+.ll-card__excerpt {
+    font-size: 0.8rem;
+    color: var(--ll-text-secondary);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.ll-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--ll-border);
+}
+
+.ll-card__meta {
+    font-family: var(--ll-font-mono);
+    font-size: 0.6rem;
+    color: var(--ll-text-dim);
+    display: flex;
+    gap: 0.75rem;
+}
+
+.ll-card__arrow {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ll-border);
+    color: var(--ll-color-primary);
+    transition: all var(--ll-transition-fast);
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.ll-card:hover .ll-card__arrow {
+    background: var(--ll-color-primary);
+    color: var(--ll-text-black);
+    border-color: var(--ll-color-primary);
+}
+
+.ll-card--primary .ll-card__body { padding: 1.5rem; }
+.ll-card--primary .ll-card__title { font-size: 1.15rem; }
+
+.ll-card--compact { min-height: 320px; }
+.ll-card--compact .ll-card__img { height: 150px; }
+.ll-card--compact .ll-card__body { padding: 1rem; }
+.ll-card--compact .ll-card__title { font-size: 0.9rem; }
+
+.ll-card--fixed { min-height: 400px; }
+.ll-card--fixed .ll-card__img { height: 200px; }
+
+/* ---------------------------------------------------------------------------
+ * SERIES CARD
+ * ---------------------------------------------------------------------------
+ * Simple card with animated left border on hover.
+ */
+
+.ll-series-card {
+    background: var(--ll-bg-card);
+    border: 1px solid var(--ll-border);
+    padding: 2rem 1.5rem;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--ll-transition-base);
+    position: relative;
+    display: block;
+}
+
+.ll-series-card:hover {
+    border-color: var(--ll-color-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--ll-glow);
+}
+
+.ll-series-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--ll-color-primary);
+    transition: height var(--ll-transition-base);
+}
+
+.ll-series-card:hover::before {
+    height: 100%;
+}
+
+.ll-series-card__icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.ll-series-card__title {
+    font-family: var(--ll-font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ll-text);
+}
+
+.ll-series-card__desc {
+    font-size: 0.8rem;
+    color: var(--ll-text-muted);
+    line-height: 1.6;
+}
+
+.ll-series-card__count {
+    font-family: var(--ll-font-mono);
+    font-size: 0.6rem;
+    color: var(--ll-color-primary);
+    margin-top: 1rem;
+    opacity: 0.7;
+    display: block;
+}
+
+/* ---------------------------------------------------------------------------
+ * ARTICLE ROW
+ * ---------------------------------------------------------------------------
+ * Archive-style list item with numbered counter.
+ */
+
+.ll-article-list {
+    display: flex;
+    flex-direction: column;
+    counter-reset: article-counter;
+}
+
+.ll-article-row {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--ll-border);
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transition: padding var(--ll-transition-fast);
+    counter-increment: article-counter;
+}
+
+.ll-article-row::before {
+    content: '';
+    position: absolute;
+    left: -1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: transparent;
+    transition: background var(--ll-transition-fast);
+}
+
+.ll-article-row:hover::before {
+    background: var(--ll-color-primary);
+}
+
+.ll-article-row:hover {
+    padding-left: 0.5rem;
+}
+
+.ll-article-row__num {
+    font-family: var(--ll-font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ll-text-dim);
+    transition: color var(--ll-transition-fast), text-shadow var(--ll-transition-fast);
+}
+
+.ll-article-row__num::before {
+    content: counter(article-counter, decimal-leading-zero);
+}
+
+.ll-article-row:hover .ll-article-row__num {
+    color: var(--ll-color-primary);
+    text-shadow: var(--ll-glow-text);
+}
+
+.ll-article-row__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.ll-article-row__title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ll-text);
+    transition: color var(--ll-transition-fast);
+    margin: 0;
+}
+
+.ll-article-row:hover .ll-article-row__title {
+    color: var(--ll-color-primary);
+}
+
+.ll-article-row__meta {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--ll-text-dim);
+}
+
+.ll-article-row__cat {
+    font-family: var(--ll-font-mono);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ll-color-primary);
+    opacity: 0.7;
+}
+
+.ll-article-row__date {
+    font-family: var(--ll-font-mono);
+    font-size: 0.7rem;
+    color: var(--ll-text-dim);
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+ * SOCIAL LINKS
+ * ---------------------------------------------------------------------------
+ * Angular icon buttons for social media links.
+ */
+
+.ll-social-links {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.ll-social-link {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ll-bg-card);
+    border: 1px solid var(--ll-border);
+    color: var(--ll-text-muted);
+    text-decoration: none;
+    transition: all var(--ll-transition-base);
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+}
+
+.ll-social-link:hover {
+    color: var(--ll-color-primary);
+    border-color: var(--ll-color-primary);
+    box-shadow: var(--ll-glow);
+}
+
+.ll-social-link svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ---------------------------------------------------------------------------
+ * PAGINATION
+ * ---------------------------------------------------------------------------
+ * Page navigation controls.
+ */
+
+.ll-pagination {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ll-pagination__info {
+    font-family: var(--ll-font-mono);
+    font-size: 0.7rem;
+    color: var(--ll-text-dim);
+}
+
+.ll-pagination__btns {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.ll-pagination__btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ll-bg-card);
+    border: 1px solid var(--ll-border);
+    color: var(--ll-text-muted);
+    cursor: pointer;
+    transition: all var(--ll-transition-fast);
+    font-size: 1.2rem;
+}
+
+.ll-pagination__btn:hover:not(:disabled) {
+    border-color: var(--ll-color-primary);
+    color: var(--ll-color-primary);
+}
+
+.ll-pagination__btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------------------------
+ * SCROLL INDICATOR
+ * ---------------------------------------------------------------------------
+ * Animated scroll prompt for hero sections.
+ */
+
+.ll-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--ll-text-muted);
+}
+
+.ll-scroll-indicator__line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--ll-color-primary), transparent);
+    animation: ll-scroll-pulse 2s ease-in-out infinite;
+}
+
+.ll-scroll-indicator__text {
+    font-family: var(--ll-font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ll-text-secondary);
+}
+
+/* ---------------------------------------------------------------------------
+ * LINK STYLES
+ * ---------------------------------------------------------------------------
+ * Styled anchor with underline glow on hover.
+ */
+
+.ll-link {
+    color: var(--ll-color-primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all var(--ll-transition-fast);
+}
+
+.ll-link:hover {
+    border-bottom-color: currentColor;
+    text-shadow: 0 0 5px var(--ll-color-primary-glow);
+}
+
+/* ---------------------------------------------------------------------------
+ * AVATAR / ICON CONTAINER
+ * ---------------------------------------------------------------------------
+ * Circular container for user avatars or icons with optional spinner.
+ */
+
+.ll-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid var(--ll-color-primary-muted);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+
+.ll-avatar__icon {
+    font-size: 1.875rem;
+    color: var(--ll-color-primary);
+}
+
+.ll-avatar__spinner {
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-top-color: var(--ll-color-primary);
+    border-radius: 50%;
+    animation: ll-spin 1s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * INFOBOX
+ * ---------------------------------------------------------------------------
+ * Highlighted information callout box.
+ */
+
+.ll-infobox {
+    padding: 1rem;
+    background: var(--ll-color-primary-subtle);
+    border-left: 4px solid var(--ll-color-primary);
+    margin-bottom: 1rem;
+}
+
+.ll-infobox__title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ll-color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.ll-infobox__text {
+    font-size: 0.75rem;
+    color: var(--ll-text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+ * NAV ITEM (SIDEBAR)
+ * ---------------------------------------------------------------------------
+ * Navigation item for sidebar menus with active state indicator.
+ */
+
+.ll-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    border-right: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--ll-transition-fast);
+}
+
+.ll-nav-item:hover {
+    opacity: 1;
+    color: var(--ll-color-primary);
+}
+
+.ll-nav-item--active {
+    opacity: 1;
+    color: var(--ll-color-primary);
+    border-right-color: var(--ll-color-primary);
+    background: linear-gradient(270deg, var(--ll-color-primary-subtle), transparent);
+}
+
+.ll-nav-item__icon {
+    width: 1.5rem;
+    text-align: center;
+}
