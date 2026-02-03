@@ -5,6 +5,8 @@
 [![CSS3](https://img.shields.io/badge/CSS3-Design_System-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Astocanthus/low-layer-cdn)](https://github.com/Astocanthus/low-layer-cdn/releases/latest)
+[![Issues](https://img.shields.io/github/issues/Astocanthus/low-layer-cdn)](https://github.com/Astocanthus/low-layer-cdn/issues)
 
 Static asset CDN for the LOW-LAYER SaaS ecosystem, serving reusable CSS design system components and 3D model assets.
 
